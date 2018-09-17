@@ -17,23 +17,22 @@ public class HelloSQLite3 {
         Connection conn = null;
         Statement stmt = null;
         try {
-            // db parameters (assumes hello.db is in the same directory)
-            String url = "jdbc:sqlite:hello.db";
+            // db parameters (assumes movies.db is in the same directory)
+            String url = "jdbc:sqlite:movies.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-            
+
             System.out.println("Connection to SQLite has been established.");
-            
-            // Ensure we can query the users table
+
+            // Ensure we can query the actors table
             stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM USERS;");
-            
+            ResultSet rs = stmt.executeQuery("SELECT * FROM ACTORS LIMIT 1;");
+
             while ( rs.next() ) {
-                
-                String  firstName = rs.getString("firstName");
-                String  lastName = rs.getString("lastName");
-                
-                System.out.println(String.format("Found %s %s", firstName, lastName));
+
+                String  name = rs.getString("name");
+
+                System.out.println(String.format("Found %s", name));
             }
             
             rs.close();  
